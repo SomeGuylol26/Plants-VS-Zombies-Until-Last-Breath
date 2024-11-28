@@ -1,8 +1,8 @@
 import pygame
-
 import game_setup
 from peashooter import Peashooter
 from zombie import Zombie
+
 
 pygame.init()
 WIDTH = 1000
@@ -18,6 +18,7 @@ pygame.mixer.music.play(-1)
 
 # Используем группы и объекты из game_setup
 all_sprites = game_setup.all_sprites
+kabooms = game_setup.kabooms
 peas = game_setup.peas
 zombie = Zombie()
 zombies = game_setup.zombies
@@ -35,6 +36,7 @@ while True:
     all_sprites.update()
     hits = pygame.sprite.groupcollide(zombies, peas, True, True)
     for hit in hits:
+        zombie.death()
         zombie = Zombie()
         all_sprites.add(zombie)
         zombies.add(zombie)

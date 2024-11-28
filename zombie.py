@@ -1,8 +1,9 @@
 import pygame
+from kaboom import Kaboom
 import random
 import game_setup
 
-
+sound_boom = pygame.mixer.Sound("./music/cherrybomb.ogg")
 class Zombie(pygame.sprite.Sprite):
 
     def __init__(self, *group):
@@ -21,7 +22,7 @@ class Zombie(pygame.sprite.Sprite):
         self.rect.y = random.randrange(30,380)
         self.frame = 0
         self.last_update = pygame.time.get_ticks()
-        self.frame_rate = 150
+        self.frame_rate = 180
         self.spawn_zombie = 0
     def update(self):
         self.rect.x -= self.speedx
@@ -34,13 +35,19 @@ class Zombie(pygame.sprite.Sprite):
         if self.frame == len(self.anim):
             self.frame = 0
         if self.rect.left < 150:
-            self.kill()
             self.spawn_zombie = 1
         if self.spawn_zombie == 1:
+            self.death()
+            self.kill()
             self.spawn_zombie = 0
             zombie = Zombie()
             game_setup.all_sprites.add(zombie)
             game_setup.zombies.add(zombie)
+    def death(self):
+        sound_boom.play()
+        kaboom = Kaboom(self.rect.x+160, self.rect.top+150)
+        game_setup.all_sprites.add(kaboom)
+        game_setup.kabooms.add(kaboom)
 
             
         

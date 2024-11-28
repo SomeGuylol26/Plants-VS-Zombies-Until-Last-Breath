@@ -3,7 +3,7 @@ from pea import Pea
 import game_setup
 
 
-sound = pygame.mixer.Sound("./music/throw.ogg")
+sound_throw = pygame.mixer.Sound("./music/throw.ogg")
 class Peashooter(pygame.sprite.Sprite):
 
     def __init__(self, *group):
@@ -73,7 +73,7 @@ class Peashooter(pygame.sprite.Sprite):
                 self.last_update = now
                 self.frame += 1
             if self.frame == 4:
-                sound.play()
+                sound_throw.play()
                 self.frame = 5
                 self.shoot()
             if self.frame == len(self.animShoot):

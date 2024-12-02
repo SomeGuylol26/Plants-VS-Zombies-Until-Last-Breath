@@ -2,7 +2,7 @@ import pygame
 import game_setup
 from peashooter import Peashooter
 from zombie import Zombie
-
+from kaboom import Kaboom
 
 pygame.init()
 WIDTH = 1000
@@ -26,7 +26,7 @@ peashooter_instance = Peashooter()
 all_sprites.add(peashooter_instance)
 all_sprites.add(zombie)
 zombies.add(zombie)
-
+score = 0
 while True:
     clock.tick(FPS)
     for event in pygame.event.get():
@@ -36,10 +36,17 @@ while True:
     all_sprites.update()
     hits = pygame.sprite.groupcollide(zombies, peas, True, True)
     for hit in hits:
+        score += 25
         zombie.death()
+        zombie.kill()
         zombie = Zombie()
-        all_sprites.add(zombie)
-        zombies.add(zombie)
+        game_setup.all_sprites.add(zombie)
+        game_setup.zombies.add(zombie)
+        
+
+
+
+
     win.blit(img, (0,0))
     all_sprites.draw(win)
 

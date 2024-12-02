@@ -36,18 +36,24 @@ class Zombie(pygame.sprite.Sprite):
             self.frame = 0
         if self.rect.left < 150:
             self.spawn_zombie = 1
+              
         if self.spawn_zombie == 1:
             self.death()
-            self.kill()
+            self.rect.x = 1200
+            self.rect.y = random.randrange(30,380)
             self.spawn_zombie = 0
-            zombie = Zombie()
-            game_setup.all_sprites.add(zombie)
-            game_setup.zombies.add(zombie)
     def death(self):
         sound_boom.play()
-        kaboom = Kaboom(self.rect.x+160, self.rect.top+150)
+        kaboom = Kaboom(self.rect.centerx, self.rect.centery)
         game_setup.all_sprites.add(kaboom)
         game_setup.kabooms.add(kaboom)
+       
+
+
+
+
+
+
 
             
         

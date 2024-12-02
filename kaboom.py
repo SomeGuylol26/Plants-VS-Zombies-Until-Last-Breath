@@ -1,4 +1,5 @@
 import pygame
+import game_setup
 
 
 
@@ -15,8 +16,8 @@ class Kaboom(pygame.sprite.Sprite):
                      pygame.image.load('./img/KABOOM_7.PNG')]
         self.image = self.anim[0]
         self.rect = self.image.get_rect()
-        self.rect.bottom = y
-        self.rect.right = x
+        self.rect.centerx = x
+        self.rect.centery = y
         self.frame = 0
         self.last_update = pygame.time.get_ticks()
         self.frame_rate = 50
@@ -29,3 +30,6 @@ class Kaboom(pygame.sprite.Sprite):
             self.frame += 1
         if self.frame == len(self.anim):
             self.kill()
+
+
+

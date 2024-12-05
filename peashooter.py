@@ -1,9 +1,10 @@
 import pygame
 from pea import Pea
 import game_setup
-
+from doom import Doom
 
 sound_throw = pygame.mixer.Sound("./music/throw.ogg")
+sound_doom = pygame.mixer.Sound("./music/doomshroom.ogg")
 class Peashooter(pygame.sprite.Sprite):
 
     def __init__(self, *group):
@@ -93,3 +94,9 @@ class Peashooter(pygame.sprite.Sprite):
         pea = Pea(self.rect.right+10, self.rect.top+27)
         game_setup.all_sprites.add(pea)
         game_setup.peas.add(pea)
+    def death(self):
+        sound_doom.play()
+        doom = Doom(self.rect.centerx, self.rect.centery-100)
+        game_setup.all_sprites.add(doom)
+        game_setup.dooms.add(doom)
+
